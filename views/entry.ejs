@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%if(locals.manga){%>
+    <title><%= locals.manga.title %></title>
+    <%}else{%>
+    <title>Not Found</title>
+    <%}%>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Faustina:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body>
+    <%- include("./partials/header.ejs") %>
+    <div class="manga-page">
+      <%if(locals.manga){%>
+      <div class="left">
+        <img
+          class="entry-image"
+          src="<%=manga.image %>"
+          alt="<%=locals.manga.title%>"
+        />
+      </div>
+      <div class="right">
+        <div class="manga-title">
+          <h1><%=manga.title%></h1>
+
+          <button class="trash" onclick="edit()">
+            <img src="./images/edit.svg" alt="Edit" />
+          </button>
+        </div>
+
+        <form class="edit-form" action="/edit" method="post">
+          <input type="hidden" name="id" value="<%= manga.id %>" />
+          <label hidden="true" id="updatedDate">
+            Date:
+            <input
+              type="text"
+              name="updatedDate"
+              class="edit-entry"
+              value="<%= manga.date.toISOString().split('T')[0] %>"
+            />
+            <br />
+          </label>
+
+          <label hidden="true" id="updatedRating">
+            Rating:
+            <input
+              type="text"
+              name="updatedRating"
+              class="edit-entry"
+              value="<%= manga.rating %>"
+            />
+            <br />
+          </label>
+
+          <label hidden="true" id="updatedSummary">
+            Summary
+            <textarea class="edit-summary-entry" name="updatedSummary">
+<%= manga.summary %></textarea
+            >
+            <br />
+          </label>
+
+          <label hidden="true" id="updatedNotes">
+            Notes
+            <textarea
+              class="edit-summary-entry"
+              name="updatedNotes"
+              id="updateNotes"
+            >
+<%= manga.notes %></textarea
+            >
+            <br />
+          </label>
+
+          <input
+            class="submit-edit"
+            id="edit"
+            hidden="true"
+            type="submit"
+            value="Edit"
+          />
+        </form>
+        <p class="dateRatingEntry" id="date">
+          Date: <%=manga.date.toISOString().split('T')[0]%>
+        </p>
+        <p class="dateRatingEntry" id="rating">Rating: <%=manga.rating%>/10</p>
+        <p id="summary" class="summary-entry"><%=manga.summary%></p>
+        <h2 id="notes-title">Notes</h2>
+        <p id="notes" class="summary-entry"><%=manga.notes%></p>
+      </div>
+      <%}else{%>
+      <h1>No entry found!</h1>
+      <%}%>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+
+    <script>
+      function edit() {
+        document.getElementById("date").setAttribute("hidden", true);
+        document.getElementById("rating").setAttribute("hidden", true);
+        document.getElementById("summary").setAttribute("hidden", true);
+        document.getElementById("notes").setAttribute("hidden", true);
+        document.getElementById("date").setAttribute("hidden", true);
+        document.getElementById("notes-title").setAttribute("hidden", true);
+        document.getElementById("updatedDate").removeAttribute("hidden");
+        document.getElementById("updatedRating").removeAttribute("hidden");
+        document.getElementById("updatedSummary").removeAttribute("hidden");
+        document.getElementById("updatedNotes").removeAttribute("hidden");
+        document.getElementById("edit").removeAttribute("hidden");
+      }
+    </script>
+  </body>
+</html>

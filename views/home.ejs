@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mia's Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Faustina:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body>
+    <%- include("./partials/header.ejs") %>
+    <div class="content">
+      <form class="sort" action="/sort" method="post">
+        <label class="sorting"
+          >Sort by:
+          <select name="sort">
+            <option name="default">Default</option>
+            <option name="date">Date</option>
+            <option name="rating">Rating</option>
+          </select>
+        </label>
+        <input class="submit-button" type="submit" value="Sort" />
+      </form>
+      <%if(locals.mangas){%> <% for(let i=0; i < mangas.length; i++){%>
+      <div name="<%=mangas[i]%>" class="manga-entry">
+        <div class="left">
+          <img class="entry-image" src="<%=mangas[i].image%>" alt="image" />
+        </div>
+        <div class="right">
+          <div class="manga-title">
+            <a href="/<%=mangas[i].title%>"><h1><%=mangas[i].title%></h1></a>
+
+            <form action="/delete" method="post">
+              <button
+                onclick="this.form.submit()"
+                class="trash"
+                name="deleteEntryId"
+                value="<%=mangas[i].id%>"
+              >
+                <img src="./images/trash.svg" alt="trash" />
+              </button>
+            </form>
+          </div>
+
+          <div class="dateRating">
+            <p>Date: <%=mangas[i].date.toISOString().split('T')[0]%></p>
+            <p>Rating: <%=mangas[i].rating%>/10</p>
+          </div>
+          <p class="summary"><%=mangas[i].summary%></p>
+        </div>
+      </div>
+      <%}%> <%}else{%>
+      <h1>No Entries</h1>
+      <%}%>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Entry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Faustina:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body>
+    <%- include("./partials/header.ejs") %>
+    <div>
+      <form action="/add" method="post">
+        <div class="content-add">
+          <h1 class="entry-title">Add An Entry</h1>
+          <label>Title</label>
+          <input type="text" name="title" class="edit-entry" />
+          <br />
+          <label>Date read</label>
+          <input type="text" name="date" class="edit-entry" />
+          <br />
+          <label>Rating</label>
+          <input type="text" name="rating" class="edit-entry" />
+          <br />
+          <label>Summary</label>
+          <textarea name="summary" id="sum" class="edit-entry"></textarea>
+          <br />
+          <label>Notes</label>
+          <textarea name="notes" id="note" class="edit-entry"></textarea>
+          <br />
+          <input class="submit-edit" type="submit" value="Create" />
+        </div>
+      </form>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>

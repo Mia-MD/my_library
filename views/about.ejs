@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Faustina:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body>
+    <%- include("./partials/header.ejs") %>
+    <div class="content-about">
+      <h1>About</h1>
+      <p>
+        This is a simple book notes web application where you can write about
+        all the manga you've read! I made this as a project for The Complete
+        Full-Stack Development Bootcamp by Angela Yu. This site uses Postgresql
+        as the database to store all the information about each entry. Note:
+        ratings can only be whole numbers. this web app uses the Kitsu API to
+        retrieve the manga cover. It's really cool I recommend checking it out!
+      </p>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>
